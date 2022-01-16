@@ -27,65 +27,124 @@ export const login = async (username, password) => {
         },
       }),
     });
-    // console.log(response);
-    // const result = await response.json();
-    // console.log(result);
-
-    const {
-      data: { token },
-    } = await response.json();
-    return token;
+    const data = await response.json();
+    console.log("login", data);
+    if (data.success) {
+      const {
+        data: { token, message },
+      } = data;
+      return [token, message];
+    } else {
+      const {
+        error: { token, message },
+      } = data;
+      return [token, message];
+    }
   } catch (error) {
     console.error(error);
   }
 };
 
 export const register = async (username, password) => {
-  const response = await fetch(`${BASE_URL}/users/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        username,
-        password,
+  try {
+    const response = await fetch(`${BASE_URL}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    }),
-  });
-
-  const data = await response.json();
-  console.log(data);
-  if (data.success) {
-      const {data: {token, message}} = data
-      return [token,message];
-  } else {
-      const{error: {token, message}} = data
-      return [token,message];
-}
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
+        },
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    if (data.success) {
+      const {
+        data: { token, message },
+      } = data;
+      return [token, message];
+    } else {
+      const {
+        error: { token, message },
+      } = data;
+      return [token, message];
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const getUser = async (token) => {
-  const response = await fetch(`${BASE_URL}/users/me`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const { data: userObject } = await response.json();
-  console.log(userObject);
-  return userObject;
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { data: userObject } = await response.json();
+    console.log(userObject);
+    return userObject;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export const addPost = async (token, posts) => {
-  const response = await fetch(`${BASE_URL}/posts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(posts)
-});
-  const {data: { post }} = await response.json();
-  return post;
+export const addPost = async (token, post) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ post }),
+    });
+    const {
+      data: { post: newPost },
+    } = await response.json();
+    console.log(newPost);
+    return newPost;
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+export const deletePost = async (token, postID) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    console.log("data", data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const addMessage = async (token, postID, content) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postID}/messages`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        message: {
+          content
+        }
+      })
+    })
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}

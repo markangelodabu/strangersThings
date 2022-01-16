@@ -1,0 +1,22 @@
+.postform {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    background-color: rgb(6, 181, 204);;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 0px 250px 0px 250px;
+    width: 95%;
+}
+
+.checkbox {
+    width: 10px;
+}
+
+input {
+    margin: 5px;
+    width: 85%;
+    height: 20px;
+}

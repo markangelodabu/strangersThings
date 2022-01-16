@@ -16,32 +16,46 @@ function App() {
       setUser({});
     }
   };
-  //setToken('') <- used for when logging out
-
-  // console.log(user);
+  console.log(user);
 
   useEffect(() => {
-    // fetch for the user object
     handleUser();
-    //runs when token changes (log in, log out)
   }, [token]);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
 
   return (
     //place the nav bar inside the routes tag
     <div className="App">
       <nav>
         {token && <h2>Welcome, {user.username}</h2>}
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <Link className="home" to="/">Home</Link>
+        {!token && <Link className="login" to="/login">Login</Link>}
+        {!token && <Link className="register" to="/register">Register</Link>}
+        {token && (
+          <button
+            className="logoutButton"
+            onClick={() => {
+              setToken("");
+              localStorage.removeItem("token");
+            }}
+          >
+            Log Out
+          </button>
+        )}
       </nav>
       <Routes>
-        <Route path="/" element={<Posts />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Posts token={token} />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
         <Route
           path="/register"
           element={<Register token={token} setToken={setToken} />}
         />
+        {/* <Route path="/messages " element={<Messages/>} /> */}
       </Routes>
     </div>
   );

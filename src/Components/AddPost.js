@@ -2,28 +2,27 @@ import { useState } from "react";
 import PostForm from "./PostForm";
 import { addPost } from "../api";
 
-
-const AddPost = ({ fetchPosts, token, setPosts, posts }) => {
+const AddPost = ({ token, setPosts, posts }) => {
   const blankPost = {
-    post: {
-      title: "",
-      description: "",
-      price: "",
-      willDeliver: false,
-    },
+    title: "",
+    description: "",
+    price: "",
+    location: "",
+    willDeliver: false,
   };
   const [post, setPost] = useState(blankPost);
+  // console.log(post);
 
   const handleAdd = async (event) => {
-      try {
-          event.preventDefault();
-          const { data: { post: newPost} } = await addPost (token, post)
-          setPosts([...posts, newPost]);
-          setPost(blankPost);
-      } catch (error) {
-        console.error(error);
-      }
-  }
+    try {
+      event.preventDefault();
+      const newPost = await addPost(token, post);
+      setPosts([...posts, newPost]);
+      setPost(blankPost);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <h2>Add Post</h2>
