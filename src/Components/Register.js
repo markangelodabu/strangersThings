@@ -1,3 +1,4 @@
+import "./Register.css"
 import { useState } from "react";
 import { register } from "../api";
 import { Link, useNavigate } from "react-router-dom";
@@ -34,7 +35,7 @@ const Register = ({ setToken }) => {
           setPassword(event.target.value);
         }}
       />
-      <button>submit</button>
+      <button>Submit</button>
       <div>
         <Link to="/login">Already have an account? Login Here!</Link>
         {message}

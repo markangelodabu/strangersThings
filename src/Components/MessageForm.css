@@ -1,0 +1,20 @@
+.messageform {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.messagetitle {
+    background-color: rgb(36, 153, 168);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.messagebox {
+    width: 500px;
+    height: 100px;
+    margin: 10px 0px 20px 0px;
+}

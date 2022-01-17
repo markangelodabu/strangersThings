@@ -1,12 +1,14 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import { Posts, Login, Register } from "./Components";
+import { Posts, Login, Register, MessageForm} from "./Components";
 import { useState, useEffect } from "react";
-import { getUser } from "./api";
+import { getUser} from "./api";
+
 
 function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [posts, setPosts] = useState([]);
 
   const handleUser = async () => {
     if (token) {
@@ -15,7 +17,7 @@ function App() {
     } else {
       setUser({});
     }
-  };
+  };  
   console.log(user);
 
   useEffect(() => {
@@ -32,13 +34,13 @@ function App() {
     //place the nav bar inside the routes tag
     <div className="App">
       <nav>
-        {token && <h2>Welcome, {user.username}</h2>}
+        {token && <h2 className="greeting">Welcome to Stranger's Things, {user.username}!</h2>}
         <Link className="home" to="/">Home</Link>
         {!token && <Link className="login" to="/login">Login</Link>}
         {!token && <Link className="register" to="/register">Register</Link>}
         {token && (
           <button
-            className="logoutButton"
+            className="logout"
             onClick={() => {
               setToken("");
               localStorage.removeItem("token");
@@ -55,7 +57,7 @@ function App() {
           path="/register"
           element={<Register token={token} setToken={setToken} />}
         />
-        {/* <Route path="/messages " element={<Messages/>} /> */}
+        <Route path="/posts/:postID/messages" element={<MessageForm posts={posts} setPosts={setPosts} setToken={setToken} token={token}/>} />
       </Routes>
     </div>
   );

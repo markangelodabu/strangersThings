@@ -4,11 +4,11 @@
     align-items: center;
     align-content: center;
     flex-direction: column;
-    background-color: rgb(6, 181, 204);;
-    padding: 10px;
+    background-color: rgb(36, 153, 168);
+    padding: 20px 0px;
     border-radius: 8px;
     margin: 0px 250px 0px 250px;
-    width: 95%;
+    /* width: 50%; */
 }
 
 .checkbox {
@@ -19,4 +19,11 @@ input {
     margin: 5px;
     width: 85%;
     height: 20px;
+}
+
+button {
+    width: 100px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 5px 3px 5px black;
 }

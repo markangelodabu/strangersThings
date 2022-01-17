@@ -1,3 +1,8 @@
+.searchbar {
+    width: 30%;
+    text-align: center;
+    height: 20px;
+}
 
 .posts {
     display: flex;
@@ -5,6 +10,7 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 5px 10px;
 }
 
 .post {
@@ -13,9 +19,9 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 350px;
-    margin: 20px;
-    background-color: rgb(6, 181, 204);
+    width: 300px;
+    margin: 10px;
+    background-color: rgb(36, 153, 168);
     border-radius: 8px;
 }
 
@@ -60,7 +66,16 @@
     border-radius: 8px;
 }
 
-.searchbar {
-    width: 95%;
+.deleteButton {
+    width: 100px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 5px 3px 5px black;
 }
 
+.messageButton {
+    width: 100px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 5px 3px 5px black;
+}

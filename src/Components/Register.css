@@ -1,0 +1,18 @@
+.register-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 400px;
+    background-color: rgb(36, 153, 168);
+    padding-bottom: 25px;
+    border-radius: 10px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+button {
+    margin-bottom: 10px;
+}
