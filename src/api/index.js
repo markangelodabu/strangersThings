@@ -153,3 +153,23 @@ export const addMessage = async (token, postID, content) => {
     console.error(error);
   }
 }
+
+export const editPost = async (token, post) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts`, {
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify({post}),
+});
+    const {
+      data: { post: newPost },
+    } = await response.json();
+    console.log(newPost);
+    return newPost;
+  } catch (error) {
+    console.error(error);
+  }
+}
